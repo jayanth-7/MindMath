@@ -1,55 +1,29 @@
 import React, { useState } from "react";
-import "./styles.css";
-import "./components/Default";
-import "./components/ToggleVisibility";
-// import Default from "./components/Default";
-// import ToggleVisibility from "./components/ToggleVisibility";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navigation from "./Navigation";
+import Addition from "./components/Addition";
+import Subtraction from "./components/Subtraction";
+import Multiplication from "./components/Multiplication";
+import Division from "./components/Division";
+import "./components/styles.css";
 
 const App = () => {
-  const [num, setNum] = useState(0);
-  const [numb, setNumb] = useState(0);
+  const [isActive, setIsActive] = useState(false);
 
-  const randomNumInRange = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  const toggleNavBar = () => {
+    setIsActive(!isActive);
   };
-  const randomNumbInRange = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
-  const handleClick = () => {
-    setNum(randomNumInRange(1, 99));
-    setNumb(randomNumbInRange(1, 99));
-    setShow(false);
-  };
-
-  const [show, setShow] = useState(true);
-  var ans = num + numb;
-
   return (
-    <div
-      className="App"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <h1>
-        {num} + {numb}
-      </h1>
-
-      {show ? <h2>ans: {num + numb}</h2> : null}
-
-      <button className="gen-button" onClick={handleClick}>
-        Gen
-      </button>
-      <button className="toggle-button" onClick={() => setShow(!show)}>
-        show
-      </button>
-
-      {/* <ToggleVisibility>
-        <Default />
-      </ToggleVisibility> */}
-    </div>
+    <Router>
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<Addition />} />
+        <Route path="/subtraction" element={<Subtraction />} />
+        <Route path="/multiplication" element={<Multiplication />} />
+        <Route path="/division" element={<Division />} />
+      </Routes>
+    </Router>
   );
 };
+
 export default App;
