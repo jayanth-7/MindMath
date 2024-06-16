@@ -1,2 +1,2 @@
 # MindMath
-simple maths game like addition of two numbers
+simple maths game like addition, subtraction, multiplication and division of two numbers
