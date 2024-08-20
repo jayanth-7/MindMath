@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Addition App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            flex-direction: column;
+            margin: 50;
+        }
+        .content {
+            text-align: center;
+        }
+        .action-button {
+            position: absolute;
+  	    bottom: 200px;
+  	    left: 50%;
+  	    transform: translateX(-50%);
+ 	    background-color: blue;
+  	    border: none;
+  	    color: black;
+   	    padding: 17px 15px;
+   	    text-align: center;
+  	    text-decoration: none;
+  	    display: inline-block;
+  	    font-size: 16px;
+ 	    border-radius: 50%; /* Add border-radius for round shape */
+ 	    cursor: pointer;
+        }
+	h1 {
+  	    position: absolute;
+  	    top: 20px;
+  	    left: 50%;
+  	    transform: translateX(-50%);
+	}
+	h2 {
+  	    position: absolute;
+  	    top: 70px;
+  	    left: 50%;
+  	    transform: translateX(-50%);
+	}
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1 id="numbers">0 + 0</h1>
+        <h2 id="answer">ans: 0</h2>
+        <div>
+            <button id="actionButton" class="action-button" style="background-color: #4fcde3;">Go!</button>
+        </div>
+    </div>
+
+    <script>
+        let num = 0;
+        let numb = 0;
+        let show = true;
+        let functionality = true; // True - Generate, False - Toggle Sum
+
+        const randomNumInRange = (min, max) => {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        };
+
+        const handleClick = () => {
+            if (functionality) {
+                // Generate Functionality
+                num = randomNumInRange(1, 50);
+                numb = randomNumInRange(50, 100);
+                show = false;
+            } else {
+                // Toggle Sum Functionality
+                show = !show;
+            }
+            // Update the display
+            updateDisplay();
+            // Switch functionality for next click
+            functionality = !functionality;
+        };
+
+        const updateDisplay = () => {
+            document.getElementById('numbers').innerText = `${num} + ${numb}`;
+            document.getElementById('answer').innerText = show ? `ans: ${num + numb}` : '';
+        };
+
+        document.getElementById('actionButton').addEventListener('click', handleClick);
+
+        // Initial display
+        updateDisplay();
+    </script>
+</body>
+</html>
